@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php  
+    require_once('../controle/main.php') ;
+    global $user;
+    $all_users=$user->total_users();
+   $all_ad2=$user->total_utype('Admin-2');
+   $all_clas=$user->total_utype('classic');
+  
+   
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -90,7 +99,7 @@
         <div class="midle">
             <div class="left">
                 <h3>total Numver of Users</h3>
-                <h1>12</h1>
+                <h1><?php echo($_SESSION['nb_users']); ?></h1>
             </div>
             <div class="progresse">
                 <svg>
@@ -110,7 +119,9 @@
     <div class="midle">
         <div class="left">
             <h3>total admin-2 users</h3>
-            <h1>6</h1>
+            <h1>
+                <?php echo($_SESSION['Admin-2']);?>
+            </h1>
         </div>
         <div class="progresse">
             <svg>
@@ -130,7 +141,9 @@
     <div class="midle">
         <div class="left">
             <h3>total basic Users</h3>
-            <h1>6</h1>
+            <h1>
+                <?php echo($_SESSION['classic']);?>
+            </h1>
         </div>
         <div class="progresse">
             <svg>
@@ -161,7 +174,45 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        
+    <?php
+        
+        foreach($all_ad2 as $u)
+        {
+            $name=$u->uname;
+            $id=$u->id;
+            $utype=$u->utype;
+           echo("
+           <tr>
+                <td>".$name."</td>
+                <td> ".$id."</td>
+                <td> developer</td>
+                <td class='warning'>".$utype." user</td>
+                <td class='primary'>details</td>   
+            </tr>
+           ");
+            
+         
+        }
+        foreach($all_clas as $u)
+        {
+            $name=$u->uname;
+            $id=$u->id;
+            $utype=$u->utype;
+           echo("
+           <tr>
+                <td>".$name."</td>
+                <td> ".$id."</td>
+                <td> developer</td>
+                <td class='warning'>".$utype." user</td>
+                <td class='primary'>details</td>   
+            </tr>
+           ");
+            
+         
+        }
+    ?>
+       <!--  <tr>
             <td> marcel kop</td>
             <td> 1234</td>
             <td> developer</td>
@@ -195,7 +246,7 @@
             <td> devops</td>
             <td class="warning">ordinary-user</td>
             <td class="primary">details</td>   
-        </tr>
+        </tr> -->
     </tbody>
 </table>
 <a href="#"> show all</a>
